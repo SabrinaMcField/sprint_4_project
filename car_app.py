@@ -43,3 +43,22 @@ selected_type = st.selectbox('Select for price distribution', list_for_hist)
 fig1 = px.histogram(df, x='price', color= selected_type)
 fig1.update_layout(title='<b>Split of price by {}<b>'.format(selected_type))
 st.plotly_chart(fig1)
+
+df['age'] = 2024 - df['model_year']
+
+def age_category(x):
+    if x<5: return '<5'
+    elif x>=5 and x<10: return '5-10'
+    elif x>=10 and x<20: return '10-20'
+    else: return '>20'
+
+df['age_category'] = df['age'].apply(age_category)
+
+list_for_scatter = ['odometer', 'days_listed']
+
+choice_for_scatter = st.selectbox('Price dependency on', list_for_scatter)
+
+fig2 = px.scatter(df, x='price', y=choice_for_scatter, color='age_category', hover_data=['model_year'])
+
+st.plotly_chart(fig2)
+fig2.update_layout(title='<b>Price vs {}<b>'.format(choice_for_scatter))
