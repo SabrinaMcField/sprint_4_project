@@ -6,7 +6,7 @@ import plotly.express as px
 st.header('Used Cars Market')
 st.write('Filter the data below by the ads by car model')
 
-df = pd.read_csv('/Users/sabrinamcfield/Desktop/4_sprint_project/sprint_4_project/vehicles_us.csv')
+df = pd.read_csv('vehicles_us.csv')
 
 df['model'] = df['model'].str.replace(r'[\s-]', '_', regex=True) #removes whitespace and hypens from 'model' column.
 df['type'] = df['type'].str.lower() #lowercase the 'type' column
